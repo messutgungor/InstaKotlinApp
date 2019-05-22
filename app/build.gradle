@@ -38,4 +38,7 @@ dependencies {
 
     //Circle image view için yani resimleri yuvarlak çerçeve içerisine alması için
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+
+    //universal image loader - resim işlemleri için kullanılan paket
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 }

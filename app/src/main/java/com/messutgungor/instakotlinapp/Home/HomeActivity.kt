@@ -42,9 +42,7 @@ class HomeActivity : AppCompatActivity() {
         //O an aktif olan aktivitenin ikonun seçili olması için
         var menu = bottomNavigationView.menu
         var menuItem=menu.getItem(ACTIVITY_NUMBER)
-        menuItem.setEnabled(true)
         menuItem.isChecked=true
-        Log.d(TAG,""+menuItem.itemId)
 
     }
 }
