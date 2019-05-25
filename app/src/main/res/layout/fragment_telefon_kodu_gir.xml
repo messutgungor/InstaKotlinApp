@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".Login.TelefonKoduGirFragment">
+
+    <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
+                                                 android:layout_height="match_parent" android:id="@+id/telefonCodeRoot">
+        <ProgressBar
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBarTelNoOnayla"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginTop="32dp"
+                app:layout_constraintTop_toBottomOf="@+id/btnTelCodeIleri" tools:visibility="invisible"/>
+        <TextView
+                android:text="ONAY KODUNU GİR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView22" android:textColor="@color/siyah"
+                android:textSize="16sp" android:textStyle="bold" android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="60dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+                android:text="Şu numaraya gönderdiğimiz 6 haneli kodu giriniz :"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView24" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/textView22"
+                android:textColor="@color/siyah"/>
+        <TextView
+                android:text="0554 123 45 56"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvKullanıcıTelNo" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView24" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"/>
+        <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/etOnayKodu"
+                android:hint="Onay Kodu"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:padding="14dp"
+                android:background="@drawable/register_edit_text"
+                app:layout_constraintTop_toBottomOf="@+id/tvKullanıcıTelNo" android:layout_marginTop="48dp"/>
+        <Button
+                android:text="İleri"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnTelCodeIleri" android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/etOnayKodu"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                android:textAllCaps="false"
+                android:background="@drawable/register_button"
+                android:textColor="@color/sonukmavi"
+
+        />
+        <View android:layout_width="match_parent" android:layout_height="2dp"
+              android:id="@+id/golgelikregister1"
+              android:background="@color/golgelik"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+              android:layout_marginBottom="50dp">
+
+        </View>
+        <TextView
+                android:text="Hesabın zaten var mı?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView8"
+                app:layout_constraintTop_toBottomOf="@+id/golgelikregister1" android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintHorizontal_bias="0.3"/>
+        <TextView
+                android:text="Giriş Yap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvGirisYapTelefonKodu" android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView8"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView8"
+                android:paddingRight="16dp"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"/>
+        <TextView
+                android:text="SMS onayı gönderildi."
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:id="@+id/tvSmsYollandı" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center"
+                android:background="@color/yesil"
+                android:textColor="@color/beyaz"
+                tools:visibility="gone"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                 android:id="@+id/telefonCodeContainer" tools:visibility="visible">
+
+    </FrameLayout>
+
+</android.support.constraint.ConstraintLayout>

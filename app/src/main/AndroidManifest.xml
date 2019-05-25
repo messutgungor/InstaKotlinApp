@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.messutgungor.instakotlinapp">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
             android:allowBackup="true"
@@ -11,6 +11,17 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".Login.RegisterActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+
+                <action android:name="android.intent.action.VIEW"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".Login.LoginActivity">
+        </activity>
         <activity android:name=".Profile.ProfileSettingsActivity">
         </activity>
         <activity android:name=".Share.ShareActivity">
@@ -22,13 +33,7 @@
         <activity android:name=".News.NewsActivity">
         </activity>
         <activity android:name=".Home.HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-
-                <action android:name="android.intent.action.VIEW"/>
-            </intent-filter>
         </activity>
     </application>
 

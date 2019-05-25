@@ -41,4 +41,17 @@ dependencies {
 
     //universal image loader - resim işlemleri için kullanılan paket
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+    //fragmentler,activityler arasında bilgi alışverişini sağlamak için kullanılıyor
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    //Firebase için gerekli ekleme
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.google.firebase:firebase-auth:17.0.0'
+    implementation 'com.google.firebase:firebase-database:17.0.0'
+
+    //Google un geliştirdiği Firebase i daha etkin kullanmak için bir kütüphane
+    implementation 'com.firebaseui:firebase-ui-auth:5.0.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

@@ -11,5 +11,6 @@
     <color name="sonukmavi">#643997f0</color>
     <color name="kirmizi">#fe0000</color>
     <color name="gri">#747474</color>
+    <color name="yesil">#00C853</color>
     <color name="selector_item_color">#000</color>
 </resources>

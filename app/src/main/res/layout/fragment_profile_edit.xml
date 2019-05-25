@@ -162,6 +162,15 @@
                     app:layout_constraintStart_toStartOf="@+id/textView21" android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
                     android:hint="İnternet Sitesi"/>
+            <ProgressBar
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/progressBarEditProfile"
+                    app:layout_constraintTop_toTopOf="@+id/circleProfilimage"
+                    app:layout_constraintStart_toStartOf="@+id/circleProfilimage"
+                    app:layout_constraintEnd_toEndOf="@+id/circleProfilimage"
+                    app:layout_constraintBottom_toBottomOf="@+id/circleProfilimage"/>
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
