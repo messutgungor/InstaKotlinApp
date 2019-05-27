@@ -27,6 +27,8 @@ class UniversalImageLoader(val mContext:Context) {
             .cacheInMemory(true)
             .cacheOnDisk(true).resetViewBeforeLoading(true)
             .imageScaleType(ImageScaleType.EXACTLY)
+            .considerExifParams(true)
+            .bitmapConfig(Bitmap.Config.RGB_565)
             .displayer(FadeInBitmapDisplayer(400))
             .build()
          return  ImageLoaderConfiguration.Builder(mContext)
@@ -39,7 +41,7 @@ class UniversalImageLoader(val mContext:Context) {
     companion object{
         private val defaultImage = R.drawable.ic_profile
 
-        fun setImage(imgURL : String, imageView: ImageView, mProgressBar: ProgressBar?,ilkKisim:String ){
+        fun setImage(imgURL : String, imageView: ImageView, mProgressBar: ProgressBar?,ilkKisim:String?){
 
             //imgURL : facebook.com/images/logo.jpeg
             //ilkkısım : http://

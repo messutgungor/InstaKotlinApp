@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                             android:layout_height="match_parent">
+
+    <com.messutgungor.instakotlinapp.utils.GridViewCustomImage
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal"
+            android:id="@+id/imgTekSutunImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:scaleType="centerCrop"/>
+    <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBarGridImage"
+            app:layout_constraintTop_toTopOf="@+id/imgTekSutunImage"
+            app:layout_constraintStart_toStartOf="@+id/imgTekSutunImage"
+            app:layout_constraintBottom_toBottomOf="@+id/imgTekSutunImage"
+            app:layout_constraintEnd_toEndOf="@+id/imgTekSutunImage"/>
+    <TextView
+            android:text="00:00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvSure" android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imgTekSutunImage"
+            app:layout_constraintEnd_toEndOf="@+id/imgTekSutunImage" android:layout_marginEnd="2dp"
+            android:textColor="@color/beyaz" tools:visibility="gone"/>
+</android.support.constraint.ConstraintLayout>

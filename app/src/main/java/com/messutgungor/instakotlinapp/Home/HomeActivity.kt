@@ -69,7 +69,7 @@ class HomeActivity : AppCompatActivity() {
                 var user = FirebaseAuth.getInstance().currentUser
                 if (user==null){
                     var intent = Intent(this@HomeActivity,LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK) //Geri Tuşuna basıldığında aktivitenin tekrar açıkmasını önlemek için eklendi
                     startActivity(intent)
                     finish()
                 }else{

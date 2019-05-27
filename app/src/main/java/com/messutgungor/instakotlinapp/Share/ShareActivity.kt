@@ -2,9 +2,8 @@ package com.messutgungor.instakotlinapp.Share
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.messutgungor.instakotlinapp.R
-import com.messutgungor.instakotlinapp.utils.BottomNavigationViewHelper
+import com.messutgungor.instakotlinapp.utils.SharePagerAdapter
 import kotlinx.android.synthetic.main.activity_share.*
 
 class ShareActivity : AppCompatActivity() {
@@ -14,19 +13,27 @@ class ShareActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_share)
-        setupNavigationView()
+
+        setupShareViewPager()
 
     }
 
+    private fun setupShareViewPager() {
 
-    fun setupNavigationView(){
-        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationView)
-        BottomNavigationViewHelper.setupNavigation(this,bottomNavigationView)
+        var tabAdlari= ArrayList<String>()
+        tabAdlari.add("GALERİ")
+        tabAdlari.add("FOTOĞRAF")
+        tabAdlari.add("VİDEO")
 
-        //O an aktif olan aktivitenin ikonun seçili olması için
-        var menu = bottomNavigationView.menu
-        var menuItem=menu.getItem(ACTIVITY_NUMBER)
-        menuItem.isChecked=true
 
+        var sharePagerAdapter = SharePagerAdapter(supportFragmentManager,tabAdlari)
+        sharePagerAdapter.addFragment(ShareGalleryFragment())
+        sharePagerAdapter.addFragment(ShareCameraFragment())
+        sharePagerAdapter.addFragment(ShareVideoFragment())
+
+        shareViewPager.adapter=sharePagerAdapter
+        shareTapLayout.setupWithViewPager(shareViewPager)
     }
+
+
 }
