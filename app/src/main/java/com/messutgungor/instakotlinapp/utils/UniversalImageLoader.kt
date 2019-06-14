@@ -59,7 +59,6 @@ class UniversalImageLoader(val mContext:Context) {
                         mProgressBar.visibility=View.VISIBLE
                     }
 
-
                 }
 
                 override fun onLoadingCancelled(imageUri: String?, view: View?) {
@@ -67,14 +66,12 @@ class UniversalImageLoader(val mContext:Context) {
                         mProgressBar.visibility=View.GONE
                     }
 
-
                 }
 
                 override fun onLoadingFailed(imageUri: String?, view: View?, failReason: FailReason?) {
                     if(mProgressBar!==null){
                         mProgressBar.visibility=View.GONE
                     }
-
 
                 }
 

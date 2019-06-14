@@ -59,6 +59,15 @@ dependencies {
 
     //Resimleri crop yapmak için kütüphane
     implementation "com.naver.android.helloyako:imagecropview:1.2.2"
+
+    //permissions -- izinleri daha rahat istemize olanak sağlayan bir kütüphane -- runtime permisson library
+    implementation 'com.karumi:dexter:5.0.0'
+
+    //Compressor -- Resim ve videoları sıkıştırmak için kullandığımız kütüphane
+    implementation 'com.iceteck.silicompressorr:silicompressor:2.2.1'
+
+    //Resim ve video view için kütüphane
+    implementation 'com.otaliastudios:cameraview:1.6.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

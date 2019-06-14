@@ -1,5 +1,13 @@
 package com.messutgungor.instakotlinapp.utils
 
+import android.os.AsyncTask
+import android.os.Environment
+import android.support.v4.app.Fragment
+import android.util.Log
+import com.iceteck.silicompressorr.SiliCompressor
+import com.messutgungor.instakotlinapp.Profile.YukleniyorFragment
+import com.messutgungor.instakotlinapp.Share.CompressLoadingFragment
+import com.messutgungor.instakotlinapp.Share.ShareNextFragment
 import java.io.File
 import java.util.*
 import kotlin.Comparator
@@ -50,5 +58,77 @@ class DosyaIslemleri {
             }
             return  tumDosyalar
         }
+
+        fun compressResimDosya(fragment: Fragment, secilenResimYolu: String?) {
+            ResimCompressAsyncTask(fragment).execute(secilenResimYolu)
+        }
+
+        fun compressVideoDosya(fragment: Fragment, secilenDosyaYolu: String?) {
+            VideoCompressAsyncTask(fragment).execute(secilenDosyaYolu)
+        }
+    }
+
+
+    internal class ResimCompressAsyncTask(fragment: Fragment) : AsyncTask<String,String,String>(){
+
+        var myFragment:Fragment = fragment
+        var compressFragment=CompressLoadingFragment()
+        override fun onPreExecute() {
+
+            compressFragment.show(myFragment.activity!!.supportFragmentManager,"compressDialogBasladi")
+            compressFragment.isCancelable=false
+
+            super.onPreExecute()
+        }
+
+        override fun doInBackground(vararg params: String?): String {
+
+            var yeniOlusanDosyaninKlasorYolu = File(Environment.getExternalStorageDirectory().absolutePath+"/DCIM/TestKlasoru/compressed")
+            var yeniDosyaYolu :String=SiliCompressor.with(myFragment.context).compress(params[0],yeniOlusanDosyaninKlasorYolu)
+
+            return yeniDosyaYolu
+        }
+
+        // doInBackground da yapılan iş bittikten sonra dönen yeni dosya yolu aşağıda onPostExecute da result olarak FilePath olarak alınıyor.
+
+        override fun onPostExecute( filePath : String?) {
+            Log.e("HATA " , "Yeni Dosyanın Yolu" + filePath )
+            compressFragment.dismiss()
+            (myFragment as ShareNextFragment).uploadStorage(filePath)
+            super.onPostExecute(filePath)
+        }
+    }
+
+    internal class VideoCompressAsyncTask(fragment: Fragment):AsyncTask<String,String,String>(){
+        var myFragment = fragment
+        var compressFragment = YukleniyorFragment()
+
+        override fun onPreExecute() {
+            compressFragment.show(myFragment.activity!!.supportFragmentManager,"compressDialogBasladi")
+            compressFragment.isCancelable=false
+            super.onPreExecute()
+        }
+
+        override fun doInBackground(vararg params: String?): String? {
+            var yeniOlusanDosyaninKlasorYolu = File(Environment.getExternalStorageDirectory().absolutePath+"/DCIM/TestKlasoru/compressedVideo/")
+
+            if(yeniOlusanDosyaninKlasorYolu.isDirectory || yeniOlusanDosyaninKlasorYolu.mkdirs()){
+                var yeniDosyaninYolu = SiliCompressor.with(myFragment.context).compressVideo(params[0],yeniOlusanDosyaninKlasorYolu.path)
+                return yeniDosyaninYolu
+            }
+            return null
+        }
+
+        override fun onPostExecute(yeniDosyaninYolu : String?) {
+
+            if (!yeniDosyaninYolu.isNullOrEmpty()){
+                Log.e("HATA " , "Yeni Video Dosyasının Yolu" + yeniDosyaninYolu )
+                compressFragment.dismiss()
+                (myFragment as ShareNextFragment).uploadStorage(yeniDosyaninYolu)
+            }
+
+            super.onPostExecute(yeniDosyaninYolu)
+        }
+
     }
 }

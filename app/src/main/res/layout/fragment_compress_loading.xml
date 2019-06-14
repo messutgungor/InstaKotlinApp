@@ -17,7 +17,7 @@
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"/>
     <TextView
-            android:text="Yükleniyor"
+            android:text="Sıkıştırılıyor..."
             android:layout_width="wrap_content"
             android:layout_height="16dp"
             android:id="@+id/tvYukleniyor"

@@ -26,7 +26,6 @@ class HomeActivity : AppCompatActivity() {
         setupAuthListener()
         mAuth = FirebaseAuth.getInstance()
         setupNavigationView()
-        setupHomeViewPager()
         initImageLoader()
 
     }
@@ -79,6 +78,11 @@ class HomeActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    override fun onResume() {
+        setupHomeViewPager()
+        super.onResume()
     }
 
     override fun onStart() {

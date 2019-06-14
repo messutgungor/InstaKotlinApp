@@ -35,7 +35,6 @@ class ProfileActivity : AppCompatActivity() {
         mUser= mAuth.currentUser!!
 
         setupToolbar()
-        setupNavigationView()
         kullaniciBilgileriniGetir()
       //  setupProfilePhoto()
 
@@ -139,6 +138,11 @@ class ProfileActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    override fun onResume() {
+        setupNavigationView()
+        super.onResume()
     }
 
     override fun onStart() {
