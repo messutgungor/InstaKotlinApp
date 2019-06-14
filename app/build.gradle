@@ -49,9 +49,25 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.9'
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.google.firebase:firebase-database:17.0.0'
+    implementation 'com.google.firebase:firebase-storage:17.0.0'
 
     //Google un geliştirdiği Firebase i daha etkin kullanmak için bir kütüphane
     implementation 'com.firebaseui:firebase-ui-auth:5.0.0'
+
+    //universalVideoView video player paketi
+    implementation 'com.linsea:universalvideoview:1.1.0@aar'
+
+    //Resimleri crop yapmak için kütüphane
+    implementation "com.naver.android.helloyako:imagecropview:1.2.2"
+
+    //permissions -- izinleri daha rahat istemize olanak sağlayan bir kütüphane -- runtime permisson library
+    implementation 'com.karumi:dexter:5.0.0'
+
+    //Compressor -- Resim ve videoları sıkıştırmak için kullandığımız kütüphane
+    implementation 'com.iceteck.silicompressorr:silicompressor:2.2.1'
+
+    //Resim ve video view için kütüphane
+    implementation 'com.otaliastudios:cameraview:1.6.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

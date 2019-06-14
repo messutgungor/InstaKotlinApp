@@ -37,7 +37,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:tint="@color/mavi"
-                            android:id="@+id/imageView4" app:layout_constraintEnd_toEndOf="parent"
+                            android:id="@+id/imgBtnDegisiklikleriKaydet" app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
                             app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
@@ -89,7 +89,7 @@
                     android:text="Fotoğrafi Değiştir"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView17" android:layout_marginTop="16dp"
+                    android:id="@+id/tvFotografiDegistir" android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/circleProfilimage"
                     app:layout_constraintStart_toStartOf="@+id/circleProfilimage"
                     app:layout_constraintEnd_toEndOf="@+id/circleProfilimage"
@@ -99,24 +99,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView18"
-                    app:layout_constraintTop_toBottomOf="@+id/textView17" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFotografiDegistir" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="16dp" android:layout_marginTop="16dp"/>
             <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/editText"
+                    android:id="@+id/etProfileName"
                     app:layout_constraintStart_toStartOf="@+id/textView18"
                     app:layout_constraintTop_toBottomOf="@+id/textView18"
                     android:layout_marginTop="8dp" android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toEndOf="parent" android:hint="Ad"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:hint="Ad"
+                    android:background="@drawable/register_edit_text"
+                    android:padding="14dp"/>
             <TextView
                     android:text="Kullanıcı Adı"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView19"
-                    app:layout_constraintTop_toBottomOf="@+id/editText"
+                    app:layout_constraintTop_toBottomOf="@+id/etProfileName"
                     app:layout_constraintStart_toStartOf="@+id/textView18"
                     android:layout_marginTop="16dp"/>
             <EditText
@@ -124,44 +127,55 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/editText2"
+                    android:id="@+id/etUserName"
                     app:layout_constraintTop_toBottomOf="@+id/textView19"
                     app:layout_constraintStart_toStartOf="@+id/textView19" android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-                    android:hint="Kullanıcı Adı"/>
+                    android:hint="Kullanıcı Adı"
+                    android:background="@drawable/register_edit_text"
+                    android:padding="14dp"/>
             <TextView
                     android:text="Biyografi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView20"
-                    app:layout_constraintTop_toBottomOf="@+id/editText2"
-                    app:layout_constraintStart_toStartOf="@+id/editText2" android:layout_marginTop="16dp"/>
+                    app:layout_constraintTop_toBottomOf="@+id/etUserName"
+                    app:layout_constraintStart_toStartOf="@+id/etUserName" android:layout_marginTop="16dp"/>
             <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/editText3"
+                    android:id="@+id/etbiography"
                     app:layout_constraintTop_toBottomOf="@+id/textView20"
                     app:layout_constraintStart_toStartOf="@+id/textView20" android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:hint="Biyografi"/>
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:hint="Biyografi"
+                    android:background="@drawable/register_edit_text"
+                    android:padding="14dp"/>
             <TextView
                     android:text="İnternet Sitesi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView21"
-                    app:layout_constraintTop_toBottomOf="@+id/editText3"
-                    app:layout_constraintStart_toStartOf="@+id/editText3" android:layout_marginTop="16dp"/>
+                    app:layout_constraintTop_toBottomOf="@+id/etbiography"
+                    app:layout_constraintStart_toStartOf="@+id/etbiography"
+                    android:layout_marginTop="16dp"
+            />
             <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/editText4"
+                    android:id="@+id/etWebSite"
                     app:layout_constraintTop_toBottomOf="@+id/textView21"
                     app:layout_constraintStart_toStartOf="@+id/textView21" android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-                    android:hint="İnternet Sitesi"/>
+                    android:hint="İnternet Sitesi"
+                    android:background="@drawable/register_edit_text"
+                    android:padding="14dp" android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
             <ProgressBar
                     style="?android:attr/progressBarStyle"
                     android:layout_width="wrap_content"
