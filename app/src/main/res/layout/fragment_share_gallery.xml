@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             tools:context=".Share.ShareGalleryFragment"
+                                             android:background="@color/beyaz">
+
+
+    <android.support.v7.widget.Toolbar
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:background="@color/beyaz"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:id="@+id/toolbar2"
+            app:contentInsetStart="0dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+    >
+        <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
+                                                     android:layout_height="match_parent">
+
+            <ImageView
+                    android:src="@drawable/ic_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgCloseGallery" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:padding="8dp"/>
+            <TextView
+                    android:text="İleri"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvIleriButon"
+                    app:layout_constraintTop_toTopOf="@+id/imgCloseGallery"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgCloseGallery" android:textSize="18sp"
+                    android:textColor="@color/mavi" android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:padding="8dp"/>
+            <Spinner
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spnKlasorAdlari" app:layout_constraintStart_toEndOf="@+id/imgCloseGallery"
+                    android:layout_marginStart="16dp" app:layout_constraintTop_toTopOf="@+id/imgCloseGallery"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgCloseGallery"/>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.Toolbar>
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar2" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintHeight_percent="0.7"
+                android:id="@+id/imgBuyukResim"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/recyclerViewDosyalar"
+                android:padding="4dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent">
+            <com.naver.android.helloyako.imagecrop.view.ImageCropView
+                    xmlns:imagecrop="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    imagecrop:outsideLayerColor="#99000000"
+                    imagecrop:setInnerGridMode="on"
+                    imagecrop:gridInnerStroke="1dp"
+                    imagecrop:gridInnerColor="#66ffffff"
+                    imagecrop:setOuterGridMode="on"
+                    imagecrop:gridOuterStroke="1dp"
+                    imagecrop:gridOuterColor="#ffffff"
+                    android:visibility="gone"
+            android:id="@+id/imgCropView"/>
+
+            <com.universalvideoview.UniversalVideoView
+                    android:id="@+id/videoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    app:uvv_autoRotation="true"
+                    app:uvv_fitXY="false"
+                    android:visibility="gone"/>
+
+        </FrameLayout>
+        <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/recyclerViewDosyalar"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintTop_toBottomOf="@+id/imgBuyukResim"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:verticalSpacing="1dp"
+                android:horizontalSpacing="1dp"
+                android:gravity="center"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

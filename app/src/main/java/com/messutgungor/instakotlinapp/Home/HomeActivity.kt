@@ -1,21 +1,33 @@
 package com.messutgungor.instakotlinapp.Home
 
+import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
+import android.support.v4.view.ViewPager
+import android.support.v7.app.AlertDialog
 import android.util.Log
+import android.view.WindowManager
 import com.google.firebase.auth.FirebaseAuth
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.*
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.messutgungor.instakotlinapp.Login.LoginActivity
 import com.messutgungor.instakotlinapp.R
-import com.messutgungor.instakotlinapp.utils.BottomNavigationViewHelper
+import com.messutgungor.instakotlinapp.utils.EventbusDataEvents
 import com.messutgungor.instakotlinapp.utils.HomePagerAdapter
 import com.messutgungor.instakotlinapp.utils.UniversalImageLoader
 import com.nostra13.universalimageloader.core.ImageLoader
 import kotlinx.android.synthetic.main.activity_home.*
+import org.greenrobot.eventbus.EventBus
 
 class HomeActivity : AppCompatActivity() {
 
-    private val ACTIVITY_NUMBER = 0
+
     private val TAG = "HomeActivity"
     lateinit var mAuth : FirebaseAuth    //Giriş işlemleri için
     lateinit var mAuthListener: FirebaseAuth.AuthStateListener
@@ -25,10 +37,8 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setupAuthListener()
         mAuth = FirebaseAuth.getInstance()
-        setupNavigationView()
-        setupHomeViewPager()
         initImageLoader()
-
+        setupHomeViewPager()
     }
 
     private fun setupHomeViewPager() {
@@ -42,19 +52,134 @@ class HomeActivity : AppCompatActivity() {
 
         homeViewPager.setCurrentItem(1) // id=1 olanı yolluyoruz. Bu sayede homeactivity çalıştığında ilk olarak home fragmentini gösterecek
 
+        homePagerAdapter.secilenFragmentiViewPagerdanSil(homeViewPager,0)
+        homePagerAdapter.secilenFragmentiViewPagerdanSil(homeViewPager,2)
+
+
+        homeViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(p0: Int) {
+            }
+
+            override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
+            }
+
+            override fun onPageSelected(p0: Int) {
+                if(p0==0)
+                {
+                    //Camera fragmentine geçildiğinde ekranın üstündeki barı kaldırıp full ekran yapıyoruz
+                    this@HomeActivity.window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                    this@HomeActivity.window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+
+                    homePagerAdapter.secilenFragmentiViewPagerdanSil(homeViewPager,1)
+                    homePagerAdapter.secilenFragmentiViewPagerdanSil(homeViewPager,2)
+                    storageVeKameraIzinIste()
+                    homePagerAdapter.secilenFragmentiViewPageraEkle(homeViewPager,0)
+
+                    //Burada kameraya ulaşacağımız için kamera izni istiyoruz
+
+                }
+
+                if(p0==1)
+                {    //Home fragmentine geçildiğinde ekranın üstündeki barı getirip full ekrandan çıkartıyoruz
+                    this@HomeActivity.window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+                    this@HomeActivity.window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                    homePagerAdapter.secilenFragmentiViewPagerdanSil(homeViewPager,0)
+                    homePagerAdapter.secilenFragmentiViewPagerdanSil(homeViewPager,2)
+                    homePagerAdapter.secilenFragmentiViewPageraEkle(homeViewPager,1)
+                }
+
+                if(p0==2)
+                {   //Messages fragmentine geçildiğinde ekranın üstündeki barı getirip full ekrandan çıkartıyoruz
+                    this@HomeActivity.window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+                    this@HomeActivity.window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                    homePagerAdapter.secilenFragmentiViewPagerdanSil(homeViewPager,0)
+                    homePagerAdapter.secilenFragmentiViewPagerdanSil(homeViewPager,1)
+                    homePagerAdapter.secilenFragmentiViewPageraEkle(homeViewPager,2)
+                }
+
+
+            }
+
+
+        })
+
+    }
+
+    private fun storageVeKameraIzinIste() {
+        Dexter.withActivity(this)
+            .withPermissions(android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.CAMERA)
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+                    if(report!!.areAllPermissionsGranted()){
+                        EventBus.getDefault().postSticky(EventbusDataEvents.KameraIzinBilgisiGonder(true))
+                    }
+                    if(report!!.isAnyPermissionPermanentlyDenied){
+                        Log.e("ShareActivity" , "izinlerden birine bir daha sorma denmiş.")
+                        var builder = AlertDialog.Builder(this@HomeActivity)
+                        builder.setTitle("İzin Gerekli")
+                        builder.setMessage("Ayarlar Kısmından uygulamaya gerekli izinleri vermeniz gerekiyor. Onaylar mısınız?")
+                        builder.setPositiveButton("AYARLARA GİT",object : DialogInterface.OnClickListener{
+                            override fun onClick(dialog: DialogInterface?, which: Int) {
+                                dialog!!.cancel()
+                                var intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                var uri = Uri.fromParts("package",packageName,null)
+                                intent.setData(uri)
+                                startActivity(intent)
+                            }
+
+                        })
+                        builder.setNegativeButton("İPTAL", object: DialogInterface.OnClickListener{
+                            override fun onClick(dialog: DialogInterface?, which: Int) {
+                                dialog!!.cancel()
+                                homeViewPager.setCurrentItem(1)
+                            }
+                        })
+                        builder.show()
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: MutableList<PermissionRequest>?,
+                    token: PermissionToken?
+                ) {
+                    Log.e("HATA Mesajı " , "izinlerden biri reddedilmiş , kullanıcıyı ikna etmemiz gerekiyor dostum.")
+                    token!!.continuePermissionRequest()
+                    //token!!.cancelPermissionRequest()  // Eğer kullanırsak artık uygulama kullanıcıdan izin istemeyi bırakır.
+                    var builder = AlertDialog.Builder(this@HomeActivity)
+                    builder.setTitle("İzin Gerekli")
+                    builder.setMessage("Uygulamaya izin vermeniz gerekiyor, Onaylar mısınız? ")
+                    builder.setPositiveButton("ONAY VER",object : DialogInterface.OnClickListener{
+                        override fun onClick(dialog: DialogInterface?, which: Int) {
+                            dialog!!.cancel()
+                            token!!.continuePermissionRequest()
+                            homeViewPager.setCurrentItem(1)
+                        }
+
+                    })
+                    builder.setNegativeButton("İPTAL", object: DialogInterface.OnClickListener{
+                        override fun onClick(dialog: DialogInterface?, which: Int) {
+                            dialog!!.cancel()
+                            token!!.cancelPermissionRequest()
+                            homeViewPager.setCurrentItem(1)
+                        }
+
+                    })
+                    builder.show()
+                }
+
+            })
+            .withErrorListener(object : PermissionRequestErrorListener {
+                override fun onError(error: DexterError?) {
+                    Log.e("HATA",""+error.toString())
+                }
+
+            })
+            .check()
     }
 
 
-    fun setupNavigationView(){
-        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationView)
-        BottomNavigationViewHelper.setupNavigation(this,bottomNavigationView)
-
-        //O an aktif olan aktivitenin ikonun seçili olması için
-        var menu = bottomNavigationView.menu
-        var menuItem=menu.getItem(ACTIVITY_NUMBER)
-        menuItem.isChecked=true
-
-    }
 
     private fun initImageLoader(){
         var universalImageLoader= UniversalImageLoader(this)
@@ -79,6 +204,12 @@ class HomeActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onStart() {

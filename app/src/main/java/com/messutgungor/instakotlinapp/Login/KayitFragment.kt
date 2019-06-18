@@ -20,6 +20,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.messutgungor.instakotlinapp.Model.UserDetails
 import com.messutgungor.instakotlinapp.Model.Users
 
 import com.messutgungor.instakotlinapp.R
@@ -106,9 +107,11 @@ class KayitFragment : Fragment() {
                                             if (p0.isSuccessful) {
                                                 Toast.makeText(activity, "Kayıt işlemi başarılı", Toast.LENGTH_SHORT).show()
                                                 //Oturum Açan Kullanıcının verilerinin database ye kayıt edilmesi
+
+                                                var kaydedilecekKullaiciDetaylari = UserDetails("0","0","0","","","")
                                                 var userID = mAuth.currentUser!!.uid.toString()
                                                 var kayitEdilecekKullanici =
-                                                    Users(gelenEmail, sifre, kullaniciAdi, adiSoyadi, "", "", userID)
+                                                    Users(gelenEmail, sifre, kullaniciAdi, adiSoyadi, "", "", userID,kaydedilecekKullaiciDetaylari)
 
                                                 mRef.child("users")
                                                     .child(userID).setValue(kayitEdilecekKullanici)
@@ -116,8 +119,8 @@ class KayitFragment : Fragment() {
                                                         override fun onComplete(p0: Task<Void>) {
                                                             if (p0.isSuccessful) {
                                                                 Toast.makeText(
-                                                                    activity,
-                                                                    "Kullnıcı Database ye Kayıt Edildi.",
+                                                                    activity!!,
+                                                                    "Kullanıcı Database ye Kayıt Edildi.",
                                                                     Toast.LENGTH_SHORT
                                                                 ).show()
                                                                 progressBarKullaniciKayit.visibility=View.INVISIBLE
@@ -128,7 +131,7 @@ class KayitFragment : Fragment() {
                                                                         override fun onComplete(p0: Task<Void>) {
                                                                             if (p0.isSuccessful) {
                                                                                 Toast.makeText(
-                                                                                    activity,
+                                                                                    activity!!,
                                                                                     "Hata! Kullanıcı Databaseye Kayıt olmadı.",
                                                                                     Toast.LENGTH_SHORT
                                                                                 ).show()
@@ -141,7 +144,7 @@ class KayitFragment : Fragment() {
                                                         }
                                                     })
                                             } else {
-                                                Toast.makeText(activity, "Kayıt yapılamadı. " + p0.exception, Toast.LENGTH_SHORT).show()
+                                                Toast.makeText(activity!!, "Kayıt yapılamadı. " + p0.exception, Toast.LENGTH_SHORT).show()
                                                 progressBarKullaniciKayit.visibility=View.INVISIBLE
                                             }
                                         }
@@ -162,14 +165,15 @@ class KayitFragment : Fragment() {
                                         override fun onComplete(p0: Task<AuthResult>) {
                                             if (p0.isSuccessful) {
                                                 Toast.makeText(
-                                                    activity,
+                                                    activity!!,
                                                     "Kayıt işlemi tel no ile başarılı" + mAuth.currentUser!!.uid,
                                                     Toast.LENGTH_SHORT
                                                 ).show()
                                                 //Oturum Açan Kullanıcının verilerinin database ye kayıt edilmesi
+                                                var kaydedilecekKullaiciDetaylari = UserDetails("0","0","0","","","")
                                                 var userID = mAuth.currentUser!!.uid.toString()
                                                 var kayitEdilecekKullanici =
-                                                    Users("", sifre, kullaniciAdi, adiSoyadi, telNo, sahteEmail, userID)
+                                                    Users("", sifre, kullaniciAdi, adiSoyadi, telNo, sahteEmail, userID,kaydedilecekKullaiciDetaylari)
 
                                                 mRef.child("users")
                                                     .child(userID).setValue(kayitEdilecekKullanici)
@@ -177,8 +181,8 @@ class KayitFragment : Fragment() {
                                                         override fun onComplete(p0: Task<Void>) {
                                                             if (p0.isSuccessful) {
                                                                 Toast.makeText(
-                                                                    activity,
-                                                                    "Kullnıcı Database ye Kayıt Edildi.",
+                                                                    activity!!,
+                                                                    "Kullanıcı Database ye Kayıt Edildi.",
                                                                     Toast.LENGTH_SHORT
                                                                 ).show()
 
@@ -192,7 +196,7 @@ class KayitFragment : Fragment() {
                                                                         override fun onComplete(p0: Task<Void>) {
                                                                             if (p0.isSuccessful) {
                                                                                 Toast.makeText(
-                                                                                    activity,
+                                                                                    activity!!,
                                                                                     "Hata! Kullanıcı Databaseye Kayıt olmadı.",
                                                                                     Toast.LENGTH_SHORT
                                                                                 ).show()
@@ -205,7 +209,7 @@ class KayitFragment : Fragment() {
                                             } else {
                                                 progressBarKullaniciKayit.visibility=View.INVISIBLE
                                                 Toast.makeText(
-                                                    activity,
+                                                    activity!!,
                                                     "Kayıt işlemi tel no ile yapılamadı. " + p0.exception,
                                                     Toast.LENGTH_SHORT
                                                 ).show()
